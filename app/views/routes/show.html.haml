@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b= Route.human_attribute_name(:name) + ": "
+  = @route.name
+%p
+  %b= Route.human_attribute_name(:base_price) + ": "
+  = @route.base_price
+%p
+  %b= Route.human_attribute_name(:city) + ": "
+  = @route.city.name
+%p
+  %b= Route.human_attribute_name(:descr) + ": "
+  = @route.descr
+  
+  %br
+  =link_to t('helpers.back'), routes_path, class: 'btn btn-primary'

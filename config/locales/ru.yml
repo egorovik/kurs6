@@ -1,0 +1,105 @@
+ru:
+  app:
+    name: Приложение с базой данных
+    company:
+      short_name: МПУ
+      department: Кафедра
+    city:
+      index: Список городов
+      new-button: Добавить город
+      edit: Редактирование города
+      new: Добавить город
+      show: Показать город
+      destroy: Удалить город
+    excursion:
+      index: Список экскурсий
+      new-button: Добавить экскурсию
+      edit: Редактирование экскурсии
+      new: Добавить экскурсию
+      show: Показать экскурсию
+      destroy: Удалить экскурсию
+    route:
+      index: Список маршрутов
+      new-button: Добавить маршрут
+      edit: Редактирование маршрута
+      new: Добавить маршрут
+      show: Показать маршрут
+      destroy: Удалить маршрут
+    tour:
+      index: Список туров
+      new-button: Добавить тур
+      edit: Редактирование тура
+      new: Добавить тур
+      show: Показать тур
+      destroy: Удалить тур
+    users:
+      index: Список пользователей
+      new-button: Новый пользователь 
+      edit: Редактирование пользователя
+      new: Создание пользователя
+    roles:
+      index: Список возможных ролей пользователей
+      new-button: Новая роль
+      edit: Редактирование роли
+      new: Создание роли
+  helpers:
+    submit:
+      create: Сохранить
+      submit: Сохранить
+      update: Сохранить
+    sure: Действительно удалить?
+    back: Назад    
+  
+  views:
+    pagination:
+      first: ⇤
+      last: ⇥
+      previous: ←
+      next: →
+      truncate: …
+  activerecord:
+    models:
+      user: Пользователь
+      city: Город
+      excursion: Экскурсия
+      route: Маршрут
+      tour: Тур
+    attributes:
+      user:
+        email: Пользовательское имя/электронная почта
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        reset_password_email_sent_at: Дата отправления письма для смены пароля
+        activation_state: Статус активации
+        activation_token_expires_at: Дата прекращения действия токена активации
+        last_login_at: Время последнего входа в систему
+        role_users: Роли
+      role:
+        name: Обозначение
+        info: Краткое название
+        full_info: Описание
+      city:
+        name: Название
+      excursion:
+        name: Название
+        price: Цена
+        city: Город
+        descr: Описание
+      route:
+        name: Название
+        base_price: Базовая цена
+        city: Город
+        descr: Описание
+      tour:
+        start_date: Дата отъезда
+        days_in_tour: Количество дней в туре
+        route: Маршрут
+        add_price: Дополнительные взносы
+        add_descr: Дополнительное описание
+    errors:
+      models:
+        person:
+          attributes:
+            snils:
+              check_sum: имеет неправильную контрольную сумму
+          

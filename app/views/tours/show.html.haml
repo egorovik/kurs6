@@ -1,0 +1,20 @@
+%p#notice= notice
+
+%p
+  %b= Tour.human_attribute_name(:start_date) + ": "
+  = @tour.start_date
+%p
+  %b= Tour.human_attribute_name(:days_in_tour) + ": "
+  = @tour.days_in_tour
+%p
+  %b= Tour.human_attribute_name(:route) + ": "
+  = @tour.route.name
+%p
+  %b= Tour.human_attribute_name(:add_price) + ": "
+  = @tour.add_price
+%p
+  %b= Tour.human_attribute_name(:add_descr) + ": "
+  = @tour.add_descr
+  
+  %br
+  =link_to t('helpers.back'), tours_path, class: 'btn btn-primary'

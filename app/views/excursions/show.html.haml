@@ -1,0 +1,17 @@
+%p#notice= notice
+
+%p
+  %b= Excursion.human_attribute_name(:name) + ":"
+  = @excursion.name
+%p
+  %b= Excursion.human_attribute_name(:price) + ":"
+  = @excursion.price
+%p
+  %b= Excursion.human_attribute_name(:city) + ":"
+  = @excursion.city.name
+%p
+  %b= Excursion.human_attribute_name(:descr) + ":"
+  = @excursion.descr
+  
+  %br
+  =link_to t('helpers.back'), excursions_path, class: 'btn btn-primary'

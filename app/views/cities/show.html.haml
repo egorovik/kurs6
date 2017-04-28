@@ -1,0 +1,8 @@
+%p#notice= notice
+
+%p
+  %b= City.human_attribute_name(:name) + ": "
+  = @city.name
+  
+  %br
+  =link_to t('helpers.back'), cities_path, class: 'btn btn-primary'
