@@ -1,3 +1,14 @@
-%h1= t('app.route.edit')
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      База данных
+    %li
+      = link_to 'Туры', tours_path
+    %li
+      = t('headers.tours.edit')
 
-= render 'form'
+  %h1= t('headers.tours.edit')
+
+  = render 'form'
+- else
+  %h1= t('helpers.denied')

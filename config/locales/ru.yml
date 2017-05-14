@@ -4,28 +4,56 @@ ru:
     company:
       short_name: МПУ
       department: Кафедра
-    city:
+  helpers:
+    submit:
+      create: Сохранить
+      submit: Сохранить
+      update: Сохранить
+    sure: Действительно удалить?
+    back: Назад
+    denied: У Вас нет достаточных привилегий доступа к этой странице
+    blocked: Страница заблокирована
+  buttons:
+    edit: Редактировать
+    destroy: Удалить
+    show: Показать
+    confirm:
+      user: Действительно удалить пользователя?
+      role: Действительно удалить роль?
+      city: Действительно удалить город?
+      excursion: Действительно удалить город?
+      route: Действительно удалить маршрут?
+      tour: Действительно удалить тур?
+    new: 
+      user: Новый пользователь
+      role: Новая роль
+      city: Новый город
+      excursion: Новая экскурсия
+      route: Новый маршрут
+      tour: Новый тур
+  headers:
+    cities:
       index: Список городов
       new-button: Добавить город
       edit: Редактирование города
       new: Добавить город
       show: Показать город
       destroy: Удалить город
-    excursion:
+    excursions:
       index: Список экскурсий
       new-button: Добавить экскурсию
       edit: Редактирование экскурсии
       new: Добавить экскурсию
       show: Показать экскурсию
       destroy: Удалить экскурсию
-    route:
+    routes:
       index: Список маршрутов
       new-button: Добавить маршрут
       edit: Редактирование маршрута
       new: Добавить маршрут
       show: Показать маршрут
       destroy: Удалить маршрут
-    tour:
+    tours:
       index: Список туров
       new-button: Добавить тур
       edit: Редактирование тура
@@ -42,14 +70,6 @@ ru:
       new-button: Новая роль
       edit: Редактирование роли
       new: Создание роли
-  helpers:
-    submit:
-      create: Сохранить
-      submit: Сохранить
-      update: Сохранить
-    sure: Действительно удалить?
-    back: Назад    
-  
   views:
     pagination:
       first: ⇤
@@ -60,13 +80,14 @@ ru:
   activerecord:
     models:
       user: Пользователь
-      city: Город
-      excursion: Экскурсия
-      route: Маршрут
-      tour: Тур
+      cities: Города
+      excursions: Экскурсии
+      routes: Маршруты
+      tours: Туры
     attributes:
       user:
         email: Пользовательское имя/электронная почта
+        birthday: Дата рождения
         password: Пароль
         password_confirmation: Подтверждение пароля
         reset_password_email_sent_at: Дата отправления письма для смены пароля

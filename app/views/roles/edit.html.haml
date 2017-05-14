@@ -1,7 +1,10 @@
-%h1 Editing role
+- if is_admin?
+  %h1 Editing role
 
-= render 'form'
+  = render 'form'
 
-= link_to 'Show', @role
-\|
-= link_to 'Back', roles_path
+  = link_to 'Show', @role
+  \|
+  = link_to 'Back', roles_path
+- else
+  %h1= t('helpers.denied')

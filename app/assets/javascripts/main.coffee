@@ -1,7 +1,16 @@
-loaderf = ->
+loader_f = ->
   $('.long, .longpaginate .page a, .longpaginate .next a, .longpaginate .prev a, .longpaginate .last a, .longpaginate .first a').on 'click', ->
     $('#loader').modal('show')
     true
   true
-# $(document).ready loaderf
-$(document).on 'turbolinks:load', loaderf
+@datepicker_activation = ->
+  window.datepicker_activation_by_item($(document))
+@datepicker_activation_by_item = (item)->
+  item.find('.datepicker').datetimepicker({locale: 'ru', format: 'DD.MM.YYYY'})
+  item.find('.datetimepicker').datetimepicker({locale: 'ru', format: 'DD.MM.YYYY HH:mm'})
+
+app_ready_f = ->
+  loader_f()
+  window.datepicker_activation()
+
+$(document).on 'turbolinks:load', app_ready_f

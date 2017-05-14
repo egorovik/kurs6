@@ -5,7 +5,7 @@ class RoleUser < ActiveRecord::Base
   validates :role, presence: true
   validates :user, presence: true
   
-  Role::ROLE_FOR_METHODS.each do |rname|
+  ApplicationHelper::ROLE_FOR_METHODS.each do |rname|
     define_method "is_#{rname}?" do
       self.role.name == rname
     end

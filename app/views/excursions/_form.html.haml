@@ -1,22 +1,32 @@
 = form_for @excursion do |f|
-  - if @excursion.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@excursion.errors.count, "error")} prohibited this excursion from being saved:"
-      %ul
-        - @excursion.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :price
-    = f.number_field :price
-  .field
-    = f.label :city
-    = f.text_field :city_id
-  .field
-    = f.label :descr
-    = f.text_area :descr
-  .actions
-    = f.submit t('helpers.submit.create')
+  = error_messages_for @excursion
+  .row
+    .col-md-6
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+        = f.error_messages_for(:name)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :price
+        = f.number_field :price, class: 'form-control'
+        = f.error_messages_for(:price)
+  .panel.panel-wave
+    .panel-heading
+      Город
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = f.label City.human_attribute_name(:name)
+            = f.select(:city_id, City.all.map{|x| [x.name, x.id]}, {}, class: 'form-control')
+            = f.error_messages_for(:city_id)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :descr
+        = f.text_area :descr, class: 'form-control'
+        = f.error_messages_for(:descr)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

@@ -1,26 +1,31 @@
-%h1= t('app.city.index')
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      Администрирование
+    %li
+      = link_to t('activerecord.models.cities'), cities_path
 
-%table.table.table-hover.table-striped.center
-  %caption
-    .pull-right
-      = link_to t('app.city.new-button'), new_city_path, class: 'btn btn-primary'
-  %thead
-    %tr
-      %th= City.human_attribute_name(:name)
-      %th.p50
-      %th.p50
-      %th.p50
+  .page-header
+    %h1= t('headers.cities.index')
 
-  %tbody
-    - @cities.each do |city|
+  %table.table.table-hover.table-striped
+    %thead
       %tr
-        %td= city.name
-        %td
-          = link_to city, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td
-          = link_to edit_city_path(city), class: 'btn btn-info' do
-            = fa_icon :edit
-        %td
-          = link_to city, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
-            = fa_icon :times
+        %th= City.human_attribute_name(:name)
+        %th
+
+    %tbody
+      - @cities.each do |city|
+        %tr
+          %td.center= city.name
+          %td.right
+            = link_to edit_city_path(city), class: 'btn btn-info' do
+              = fa_icon :edit
+              = t('buttons.edit')
+            = link_to city, :method => :delete, 
+            :data => { :confirm => t('buttons.confirm.city') }, 
+            class: 'btn btn-danger' do
+              = fa_icon :times
+              = t('buttons.destroy')
+- else
+  %h1= t('helpers.denied')

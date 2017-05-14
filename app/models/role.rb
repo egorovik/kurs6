@@ -14,10 +14,8 @@ class Role < ActiveRecord::Base
       full_info: 'Оператор')
     [r1, r2]
   end
-
-  ROLE_FOR_METHODS = ['admin', 'operator']
   
-  ROLE_FOR_METHODS.each do |rname|
+  ApplicationHelper::ROLE_FOR_METHODS.each do |rname|
     define_method "is_#{rname}?" do
       self.role_name_eng == rname
     end

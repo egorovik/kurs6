@@ -1,25 +1,66 @@
 = form_for @tour do |f|
-  - if @tour.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@tour.errors.count, "error")} prohibited this tour from being saved:"
-      %ul
-        - @tour.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :start_date
-    = f.date_select :start_date
-  .field
-    = f.label :days_in_tour
-    = f.number_field :days_in_tour
-  .field
-    = f.label :route
-    = f.text_field :route_id
-  .field
-    = f.label :add_price
-    = f.number_field :add_price
-  .field
-    = f.label :add_descr
-    = f.text_area :add_descr
-  .actions
-    = f.submit t('helpers.submit.create')
+  = error_messages_for @tour
+  .row
+    .col-md-6
+      .form-group
+        = f.label :start_date
+        .input-group.date.datepicker
+          = f.text_field(:start_date, value: lnil(f.object.start_date),
+          class: 'form-control')
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+        = f.error_messages_for(:start_date)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :days_in_tour
+        = f.number_field :days_in_tour, class: 'form-control'
+        = f.error_messages_for(:days_in_tour)
+  .panel.panel-wave
+    .panel-heading
+      = f.label "Маршрут"
+    .panel-body
+      = f.fields_for (:route) do |rf|
+        .row
+          .col-md-6
+            .form-group
+              = rf.label Route.human_attribute_name(:name)
+              = rf.text_field :name, class: 'form-control'
+              = rf.error_messages_for(:name)
+        .row
+          .col-md-6
+            .form-group
+              = rf.label Route.human_attribute_name(:base_price)
+              = rf.number_field :base_price, class: 'form-control'
+              = rf.error_messages_for(:base_price)
+        .panel.panel-wave
+          .panel-heading
+            = rf.label "Город"
+          .panel-body
+            = rf.fields_for (:city) do |crf|
+              .row
+                .col-md-6
+                  .form-group
+                    = crf.label City.human_attribute_name(:name)
+                    = crf.text_field :name, class: 'form-control'
+                    = crf.error_messages_for(:name)
+        .row
+          .col-md-6
+            .form-group
+              = rf.label Route.human_attribute_name(:descr)
+              = rf.text_area :descr, class: 'form-control'
+              = rf.error_messages_for(:descr)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :add_price
+        = f.number_field :add_price, class: 'form-control'
+        = f.error_messages_for(:add_price)
+  .row
+    .col-md-6
+      .form-group
+      = f.label :add_descr
+      = f.text_area :add_descr, class: 'form-control'
+      = f.error_messages_for(:add_descr)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

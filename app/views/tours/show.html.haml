@@ -1,20 +1,33 @@
-%p#notice= notice
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      База данных
+    %li
+      = link_to 'Туры', tours_path
+    %li
+      = t('headers.tours.show')
 
-%p
-  %b= Tour.human_attribute_name(:start_date) + ": "
-  = @tour.start_date
-%p
-  %b= Tour.human_attribute_name(:days_in_tour) + ": "
-  = @tour.days_in_tour
-%p
-  %b= Tour.human_attribute_name(:route) + ": "
-  = @tour.route.name
-%p
-  %b= Tour.human_attribute_name(:add_price) + ": "
-  = @tour.add_price
-%p
-  %b= Tour.human_attribute_name(:add_descr) + ": "
-  = @tour.add_descr
+%dl
+  %dt= Tour.human_attribute_name(:start_date)
+  %dd= @tour.start_date
+  %dt= Tour.human_attribute_name(:days_in_tour)
+  %dd= @tour.days_in_tour
+  %dt= Tour.human_attribute_name(:route)
+  .step
+    %dt= Route.human_attribute_name(:name)
+    %dd= @tour.route.name
+    %dt= Route.human_attribute_name(:base_price)
+    %dd= @tour.route.base_price
+    %dt= Route.human_attribute_name(:city)
+    .step
+      %dt= City.human_attribute_name(:name)
+      %dd= @tour.route.city.name
+    %dt= Route.human_attribute_name(:descr)
+    %dd= @tour.route.descr
+  %dt= Tour.human_attribute_name(:add_price)
+  %dd= @tour.add_price
+  %dt= Tour.human_attribute_name(:add_descr)
+  %dd= @tour.add_descr
   
   %br
-  =link_to t('helpers.back'), tours_path, class: 'btn btn-primary'
+  %dd=link_to t('helpers.back'), tours_path, class: 'btn btn-primary'

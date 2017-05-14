@@ -1,14 +1,17 @@
-=breadcrumb_tag do
-  %li.active
-    = t('app.users.edit')
-  %li
-    = link_to(@user.email, @user)
-  %li
-    = link_to 'Пользователи', users_path
-  %li
-    Администрирование
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      = t('headers.users.edit')
+    %li
+      = link_to(@user.email, @user)
+    %li
+      = link_to 'Пользователи', users_path
+    %li
+      Администрирование
     
-%h1= t('app.users.edit')
+  .page-header
+    %h1= t('headers.users.edit')
 
-= render 'form'
-
+  = render 'form'
+- else
+  %h1= t('helpers.denied')

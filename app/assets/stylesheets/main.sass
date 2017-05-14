@@ -73,6 +73,12 @@ a
   .link
     font-family: 'Intro'
 
+.center
+  text-align: center
+.left
+  text-align: left
+.right
+  text-align: right
 .label-circle
   border-radius: 25%
   font-family: 'Intro'
@@ -264,3 +270,7 @@ $percents: (90 85 80 75 70 65 60 55 50 40 30 20 10 5)
   .small#{$percent}
     font-size: #{$percent+'%'}
     padding: #{round($padding-base-vertical * $percent / 100)} #{round($padding-base-horizontal * $percent / 100)} #{round($padding-base-vertical * $percent / 100)} #{round($padding-base-horizontal * $percent / 100)}
+
+.step
+  position: relative
+  left: 20px

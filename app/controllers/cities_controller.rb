@@ -54,10 +54,19 @@ class CitiesController < ApplicationController
   # DELETE /cities/1
   # DELETE /cities/1.json
   def destroy
-    @city.destroy
-    respond_to do |format|
-      format.html { redirect_to cities_url, notice: 'Город успешно удален.' }
-      format.json { head :no_content }
+    begin
+      @city.destroy
+    rescue ActiveRecord::InvalidForeignKey
+      flash[:danger] = "Город #{@city.name} удалить нельзя. Он еще связан с экскурсией или маршрутом."
+      respond_to do |format|
+        format.html { redirect_to cities_url}
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to cities_url, notice: 'Город успешно удален.' }
+        format.json { head :no_content }
+      end
     end
   end
 

@@ -1,22 +1,31 @@
 = form_for @route do |f|
-  - if @route.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@route.errors.count, "error")} prohibited this route from being saved:"
-      %ul
-        - @route.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label Route.human_attribute_name(:name)
-    = f.text_field :name
-  .field
-    = f.label Route.human_attribute_name(:base_price)
-    = f.number_field :base_price
-  .field
-    = f.label Route.human_attribute_name(:city)
-    = f.text_field :city_id
+  = error_messages_for @route
+  .row
+    .col-md-6
+      .form-group
+        = f.label Route.human_attribute_name(:name)
+        = f.text_field :name, class: 'form-control'
+        = f.error_messages_for(:name)
+  .row
+    .col-md-6
+      .form-group
+        = f.label Route.human_attribute_name(:base_price)
+        = f.number_field :base_price, class: 'form-control'
+        = f.error_messages_for(:base_price)
+  .panel.panel-wave
+    .panel-heading
+      = f.label "Город"
+    .panel-body
+      = f.fields_for (:city) do |cf|
+        .row
+          .col-md-6
+            .form-group
+              = cf.label City.human_attribute_name(:name)
+              = cf.text_field :name, class: 'form-control'
+              = cf.error_messages_for(:name)
   .field
     = f.label Route.human_attribute_name(:descr)
-    = f.text_area :descr
-  .actions
-    = f.submit t('helpers.submit.create')
+    = f.text_area :descr, class: 'form-control'
+    = f.error_messages_for(:descr)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

@@ -1,3 +1,15 @@
-%h1= t('app.city.edit')
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      Администрирование
+    %li
+      = link_to t('activerecord.models.cities'), cities_path
+    %li
+      = t('headers.cities.edit')
 
-= render 'form'
+  .page-header
+    %h1= t('headers.cities.edit')
+
+  = render 'form'
+- else
+  %h1= t('helpers.denied')

@@ -1,32 +1,37 @@
-%h1= t('app.route.index')
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      Администрирование
+    %li
+      = link_to t('activerecord.models.routes')
 
-%table.table.table-hover.table-striped.center
-  %caption
-    .pull-right
-      = link_to t('app.route.new-button'), new_route_path, class: 'btn btn-primary'
-  %thead
-    %tr
-      %th= Route.human_attribute_name(:name)
-      %th= Route.human_attribute_name(:base_price)
-      %th= Route.human_attribute_name(:city)
-      %th= Route.human_attribute_name(:descr)
-      %th
-      %th
-      %th
+  .page-header
+    %h1= t('headers.routes.index')
 
-  %tbody
-    - @routes.each do |route|
+  %table.table.table-hover.table-striped
+    %thead
       %tr
-        %td= route.name
-        %td= route.base_price
-        %td= route.city.name
-        %td= route.descr
-        %td
-          = link_to route, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td
-          = link_to edit_route_path(route), class: 'btn btn-info' do
-            = fa_icon :edit
-        %td
-          = link_to route, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
-            = fa_icon :times
+        %th= Route.human_attribute_name(:name)
+        %th= Route.human_attribute_name(:base_price)
+        %th= Route.human_attribute_name(:city)
+        %th= Route.human_attribute_name(:descr)
+        %th
+
+    %tbody
+      - @routes.each do |route|
+        %tr
+          %td.center= route.name
+          %td.center= route.base_price
+          %td.center= route.city.name
+          %td.center= route.descr
+          %td.right
+            = link_to edit_route_path(route), class: 'btn btn-info' do
+              = fa_icon :edit
+              = t('buttons.edit')
+            = link_to route, :method => :delete, 
+            :data => { :confirm => t('buttons.confirm.route') }, 
+            class: 'btn btn-danger' do
+              = fa_icon :times
+              = t('buttons.destroy')
+- else
+  %h1= t('helpers.denied')

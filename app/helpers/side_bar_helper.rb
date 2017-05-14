@@ -21,25 +21,28 @@ module SideBarHelper
       {:name => 'Роли',
        :controller => :roles, :action => :index,
        :icon => 'align-center',
-       :class => 'long'},
-    ]}
+       :class => 'long'}
+    ]} if @current_role_user.present? and @current_role_user.is_admin?
+    children = [{:name => 'Экскурсии',
+       :controller => :excursions, :action => :index,
+       :icon => 'bank'},
+       {:name => 'Туры',
+       :controller => :tours, :action => :index,
+       :icon => 'bus'}]
+    if @current_role_user.present? and @current_role_user.is_admin?
+      children << {:name => 'Города',
+       :controller => :cities, :action => :index,
+       :icon => 'building-o',
+       :class => 'long'}
+     children << {:name => 'Маршруты',
+       :controller => :routes, :action => :index,
+       :icon => 'map-o',
+       :class => 'long'}
+    end
     result << {
       :name => 'База данных',
       :icon => 'database',
-      :children => [
-      {:name => 'Города',
-       :controller => :cities, :action => :index,
-       :icon => 'building-o'},
-       {:name => 'Экскурсии',
-       :controller => :excursions, :action => :index,
-       :icon => 'bank'},
-       {:name => 'Маршруты',
-       :controller => :routes, :action => :index,
-       :icon => 'map-o'},
-       {:name => 'Туры',
-       :controller => :tours, :action => :index,
-       :icon => 'bus'}
-    ]} 
+      :children => children} if @current_role_user.present?
     result << {
       :name => 'Заголовок ссылок',
       :icon => 'search-plus',
@@ -51,8 +54,8 @@ module SideBarHelper
        :controller => :welcome, :action => :index,
        :icon => 'search',
        :class => 'long'}
-    ]} 
-    result
+    ]} if @current_role_user.present?
+    result 
   end
   
   def is_open?(ctr, act)

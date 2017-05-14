@@ -1,9 +1,19 @@
-%h1= t('app.tour.index')
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      База данных
+    %li
+      = link_to 'Туры', tours_path
+    
+.page-header
+  %h1= t('headers.tours.index')
 
-%table.table.table-hover.table-striped.center
-  %caption
-    .pull-right
-      = link_to t('app.tour.new-button'), new_tour_path, class: 'btn btn-primary'
+%table.table.table-hover.table-striped
+  - if is_admin?
+    %caption
+      = link_to new_tour_path, class: 'btn btn-success' do
+        = fa_icon :plus
+        = t('buttons.new.tour')
   %thead
     %tr
       %th= Tour.human_attribute_name(:start_date)
@@ -12,23 +22,26 @@
       %th= Tour.human_attribute_name(:add_price)
       %th= Tour.human_attribute_name(:add_descr)
       %th
-      %th
-      %th
 
   %tbody
     - @tours.each do |tour|
       %tr
-        %td= tour.start_date
-        %td= tour.days_in_tour
-        %td= tour.route.name
-        %td= tour.add_price
-        %td= tour.add_descr
-        %td
-          = link_to tour, class: 'btn btn-success' do
+        %td.center= lnil(tour.start_date)
+        %td.center= tour.days_in_tour
+        %td.center= tour.route.name
+        %td.center= tour.add_price
+        %td.center= tour.add_descr
+        %td.right
+          = link_to tour, class: 'btn btn-warning' do
             = fa_icon :eye
-        %td
-          = link_to edit_tour_path(tour), class: 'btn btn-info' do
-            = fa_icon :edit
-        %td
-          = link_to tour, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
-            = fa_icon :times
+            = t('buttons.show')
+          - if is_admin?
+            = link_to edit_tour_path(tour), class: 'btn btn-info' do
+              = fa_icon :edit
+              = t('buttons.edit')
+          - if is_admin?
+            = link_to tour, :method => :delete, 
+            :data => { :confirm => t('buttons.confirm.tour') }, 
+            class: 'btn btn-danger' do
+              = fa_icon :times
+              = t('buttons.destroy')

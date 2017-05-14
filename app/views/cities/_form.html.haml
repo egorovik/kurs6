@@ -1,13 +1,11 @@
 = form_for @city do |f|
-  - if @city.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@city.errors.count, "error")} prohibited this city from being saved:"
-      %ul
-        - @city.errors.full_messages.each do |msg|
-          %li= msg
+  = error_messages_for @city
 
-  .field
-    = f.label City.human_attribute_name(:name)
-    = f.text_field :name
-  .actions
-    = f.submit t('helpers.submit.create')
+  .row
+    .col-md-6
+      .form-group
+        = f.label City.human_attribute_name(:name)
+        = f.text_field :name, class: 'form-control'
+        = f.error_messages_for(:name)
+  .form-actions
+    = f.submit nil, class: 'btn btn-primary'

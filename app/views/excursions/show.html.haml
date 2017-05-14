@@ -1,17 +1,25 @@
-%p#notice= notice
+- if is_admin?
+  =breadcrumb_tag do
+    %li.active
+      База данных
+    %li
+      = link_to t('activerecord.models.excursions'), excursions_path
+    %li
+      = link_to(@excursion.name, @excursion)
+    %li
+      = t('headers.excursions.show')
+    
+.page-header
+  %h1= t('headers.excursions.show')
 
-%p
-  %b= Excursion.human_attribute_name(:name) + ":"
-  = @excursion.name
-%p
-  %b= Excursion.human_attribute_name(:price) + ":"
-  = @excursion.price
-%p
-  %b= Excursion.human_attribute_name(:city) + ":"
-  = @excursion.city.name
-%p
-  %b= Excursion.human_attribute_name(:descr) + ":"
-  = @excursion.descr
-  
-  %br
-  =link_to t('helpers.back'), excursions_path, class: 'btn btn-primary'
+%dl
+  %dt= Excursion.human_attribute_name(:name)
+  %dd= @excursion.name
+  %dt= Excursion.human_attribute_name(:price)
+  %dd= @excursion.price
+  %dt= Excursion.human_attribute_name(:city)
+  .step
+    %dt= City.human_attribute_name(:name)
+    %dd= @excursion.city.name
+  %dt= Excursion.human_attribute_name(:descr)
+  %dd= @excursion.descr

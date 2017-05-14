@@ -1,15 +1,18 @@
-%p#notice= notice
+-#
+  %p#notice= notice
 
-%p
-  %b Role:
-  = @role_user.role
-%p
-  %b User:
-  = @role_user.user
-%p
-  %b Data:
-  = @role_user.data
+  %p
+    %b Role:
+    = @role_user.role
+  %p
+    %b User:
+    = @role_user.user
+  %p
+    %b Data:
+    = @role_user.data
 
-= link_to 'Edit', edit_role_user_path(@role_user)
-\|
-= link_to 'Back', role_users_path
+  = link_to 'Edit', edit_role_user_path(@role_user)
+  \|
+  = link_to 'Back', role_users_path
+
+%h1= t('helpers.blocked')
