@@ -19,7 +19,7 @@
       %th= Tour.human_attribute_name(:start_date)
       %th= Tour.human_attribute_name(:days_in_tour)
       %th= Tour.human_attribute_name(:route)
-      %th= Tour.human_attribute_name(:add_price)
+      %th Общая цена
       %th= Tour.human_attribute_name(:add_descr)
       %th
 
@@ -29,7 +29,7 @@
         %td.center= lnil(tour.start_date)
         %td.center= tour.days_in_tour
         %td.center= tour.route.name
-        %td.center= tour.add_price
+        %td.center= tour.add_price + tour.route.base_price
         %td.center= tour.add_descr
         %td.right
           = link_to tour, class: 'btn btn-warning' do

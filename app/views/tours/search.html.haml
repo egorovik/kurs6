@@ -1,0 +1,129 @@
+.page-header
+  %h1 Параметры поиска
+  
+= form_tag search_tours_path(), method: :get do
+  
+  .panel.panel-wave
+    .panel-heading
+      Тур
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(Tour.human_attribute_name(:start_date))
+      .row
+        .col-md-6
+          .form-group
+            = label_tag("От")
+            .input-group.date.datepicker
+              = text_field_tag "search[tour.start_date0]", nil, class: 'form-control', value: value_for('search', 'tour.start_date0')
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+        .col-md-6
+          .form-group
+            = label_tag("До")
+            .input-group.date.datepicker
+              = text_field_tag "search[tour.start_date1]", nil, class: 'form-control', value: value_for('search', 'tour.start_date1')
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(Tour.human_attribute_name(:days_in_tour))
+      .row
+        .col-md-6
+          .form-group
+            = label_tag("От")
+            = text_field_tag "search[tour.days_in_tour0]", nil, class: 'form-control', value: value_for('search', 'tour.days_in_tour0')
+        .col-md-6
+          .form-group
+            = label_tag("До")
+            = text_field_tag "search[tour.days_in_tour1]", nil, class: 'form-control', value: value_for('search', 'tour.days_in_tour1')
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(Tour.human_attribute_name(:add_price))
+      .row
+        .col-md-6
+          .form-group
+            = label_tag("От")
+            = text_field_tag "search[tour.add_price0]", nil, class: 'form-control', value: value_for('search', 'tour.add_price0')
+        .col-md-6
+          .form-group
+            = label_tag("До")
+            = text_field_tag "search[tour.add_price1]", nil, class: 'form-control', value: value_for('search', 'tour.add_price1')
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(Tour.human_attribute_name(:add_descr))
+            = text_field_tag "search[tour.add_descr]", nil, class: 'form-control', value: value_for('search', 'tour.add_descr')
+      
+  .panel.panel-wave
+    .panel-heading
+      Маршрут
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(Route.human_attribute_name(:name))
+            = text_field_tag "search[route.name]", nil, class: 'form-control', value: value_for('search', 'route.name')
+        .col-md-6
+          .form-group
+            = label_tag(Route.human_attribute_name(:descr))
+            = text_field_tag "search[route.descr]", nil, class: 'form-control', value: value_for('search', 'route.descr')
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(Route.human_attribute_name(:base_price))
+      .row
+        .col-md-6
+          .form-group
+            = label_tag("От")
+            = text_field_tag "search[route.base_price0]", nil, class: 'form-control', value: value_for('search', 'route.base_price0')
+        .col-md-6
+          .form-group
+            = label_tag("До")
+            = text_field_tag "search[route.base_price1]", nil, class: 'form-control', value: value_for('search', 'route.base_price1')
+  .panel.panel-wave
+    .panel-heading
+      Город
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = label_tag(City.human_attribute_name(:name))
+            = text_field_tag "search[city.name]", nil, class: 'form-control', value: value_for('search', 'city.name')
+  = submit_tag "Искать", class: 'btn btn-primary'
+  
+- if !(@result[0].empty?)
+  %br
+  %ul Обнаружены параметры:
+  - @result[0].each do |r|
+    %li= t(r[0]) + ", " +  t(r[1]) + "#{r[2]}" + "#{r[3]}"
+
+  
+.page-header
+  %h1 Результат поиска
+
+%table.table.table-hover.table-striped
+  %thead
+    %tr
+      %th= Tour.human_attribute_name(:start_date)
+      %th= Tour.human_attribute_name(:days_in_tour)
+      %th= Tour.human_attribute_name(:route)
+      %th= Route.human_attribute_name(:city)
+      %th Общая цена
+      %th
+      
+  %tbody
+    - @result[1].each do |tour|
+      %tr
+        %td.center= tour.start_date
+        %td.center= tour.days_in_tour
+        %td.center= tour.route.name
+        %td.center= tour.route.city.name
+        %td.center= tour.add_price + tour.route.base_price
+        %td.right
+          = link_to tour, class: 'btn btn-warning' do
+            = fa_icon :eye
+            = t('buttons.show')

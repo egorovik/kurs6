@@ -1,5 +1,20 @@
 %aside.hidden-print#sidebar-wrapper
   %ul.sidebar-nav
+    .navbar-header
+      .navbar-brand
+        = link_to root_path do
+          = image_tag 'logo.png', alt: t('app.company.short_name')
+          = t('app.name')
+    %li
+      = link_to login_path do
+        = @current_user.blank? ? 'войти' : @current_user.email
+    %li
+      - if @current_user.blank?
+        = link_to login_path do
+          = fa_icon 'sign-in'
+      - else
+        = link_to logout_path do
+          = fa_icon 'sign-out'
     - side_bar_items(@current_role_user).each do |item|
       %li
         - if item.has_key?(:children)

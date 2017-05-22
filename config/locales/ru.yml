@@ -84,6 +84,10 @@ ru:
       excursions: Экскурсии
       routes: Маршруты
       tours: Туры
+      city: Город
+      excursion: Экскурсия
+      route: Маршрут
+      tour: Тур
     attributes:
       user:
         email: Пользовательское имя/электронная почта

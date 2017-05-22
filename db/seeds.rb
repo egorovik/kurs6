@@ -1,3 +1,12 @@
+def rand_date
+  a = 1483218000
+  a += rand(31438800)
+  t = Time.at(a)
+  d = Date.new(t.year, t.month, t.day)
+  return d
+end
+
+
 if (u1 = User.find_by_email('admin@localhost')).nil?
   u1 = User.create!(password: 'qwerty', password_confirmation: 'qwerty',
     email: 'admin@localhost')
@@ -12,21 +21,65 @@ r1, r2 = Role.create_main_roles
 ru1 = RoleUser.create(role: r1, user: u1)
 ru2 = RoleUser.create(role: r2, user: u2)
 
-city1 = City.create!(name: 'Город1')
-city2 = City.create!(name: 'Город2')
-city3 = City.create!(name: 'Город3')
+cities_arr = []
+cities_arr << City.create!(name: 'Москва')
+cities_arr << City.create!(name: 'Муром')
+cities_arr << City.create!(name: 'Кострома')
+cities_arr << City.create!(name: 'Галич')
+cities_arr << City.create!(name: 'Киров')
+cities_arr << City.create!(name: 'Пермь')
+cities_arr << City.create!(name: 'Нижний Тагил')
+cities_arr << City.create!(name: 'Екатеринбург')
+cities_arr << City.create!(name: 'Тюмень')
+cities_arr << City.create!(name: 'Омск')
 
-excursion1 = Excursion.create!(name: 'Экскурсия1', price: 1000, city: city1, descr: "Описание1")
-excursion2 = Excursion.create!(name: 'Экскурсия2', price: 2000, city: city2, descr: "Описание2")
-excursion3 = Excursion.create!(name: 'Экскурсия3', price: 3000, city: city3, descr: "Описание3")
+excursion_names = []
+excursion_names << "Музеи"
+excursion_names << "Памятники архитектуры"
+excursion_names << "Достопримечательности"
+excursion_names << "Исторический центр"
+excursion_names << "Парки"
+excursion_names << "Выставки"
 
-route1 = Route.create!(name: 'Маршрут1', base_price: 1000, city: city1, descr: "Описание1")
-route2 = Route.create!(name: 'Маршрут2', base_price: 2000, city: city2, descr: "Описание2")
-route3 = Route.create!(name: 'Маршрут3', base_price: 3000, city: city3, descr: "Описание3")
+excursion_descrs = []
+excursion_descrs << "Экскурсия внутри города"
+excursion_descrs << "Экскурсия в области"
+excursion_descrs << "Экскурсия может быть разделена на несколько дней"
+excursion_descrs << "Аренда транспорта включена в стоимость"
+excursion_descrs << "Пешая прогулка"
+excursion_descrs << "Экскурсия на автобусе"
 
-timenow = Time.now
-tour1 = Tour.create!(start_date: Date.new(timenow.year, timenow.month, timenow.day), days_in_tour: 10, route: route1, add_price: 1000, add_descr: "Дополнительное описание1")
-timenow += 60*60*24
-tour2 = Tour.create!(start_date: Date.new(timenow.year, timenow.month, timenow.day), days_in_tour: 20, route: route2, add_price: 2000, add_descr: "Дополнительное описание2")
-timenow += 60*60*24
-tour3 = Tour.create!(start_date: Date.new(timenow.year, timenow.month, timenow.day), days_in_tour: 30, route: route3, add_price: 3000, add_descr: "Дополнительное описание3")
+excursion_names.each do |n|
+  Excursion.create!(name: n, price: rand(5000) + 200, city: cities_arr.shuffle.first, descr: excursion_descrs.shuffle.first)
+end
+
+route_names = []
+route_names << "Северная часть города"
+route_names << "Южная часть города"
+route_names << "Восточная часть города"
+route_names << "Западная часть города"
+route_names << "Центральная часть города"
+route_names << "Главные пешеходные улицы"
+route_names << "Главные достопримечательности"
+route_names << "Смотровые площадки"
+
+route_descrs = []
+route_descrs << "Для пеших прогулок"
+route_descrs << "Для велосипедистов"
+route_descrs << "Для самостоятельного посещения"
+route_descrs << "Через торговые центры"
+
+routes = []
+route_names.each do |n|
+  routes << Route.create!(name: n, base_price: rand(1000) + 50, descr: route_descrs.shuffle.first, city: cities_arr.shuffle.first)
+end
+
+tous_descrs = []
+tous_descrs << "Для всей семьи"
+tous_descrs << "Для активного отдыха"
+tous_descrs << "С проживанием в отеле"
+
+15.times do |n|
+  Tour.create!(start_date: rand_date, days_in_tour: rand(20) + 1, route: routes.shuffle.first, add_price: rand(10000) + 1000, add_descr: tous_descrs.shuffle.first)
+end
+

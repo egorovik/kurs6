@@ -1,5 +1,9 @@
 class ToursController < ApplicationController
   before_action :set_tour, only: [:show, :edit, :update, :destroy]
+  
+  def search
+    @result = Tour.search(params)
+  end
 
   # GET /tours
   # GET /tours.json

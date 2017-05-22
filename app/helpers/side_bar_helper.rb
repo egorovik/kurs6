@@ -2,12 +2,6 @@ module SideBarHelper
   def side_bar_items(ru)
     result = []
     result << {
-      :name => 'На главную',
-      :icon => 'list',
-      :controller => :welcome, 
-      :action => :index
-    }
-    result << {
       :name => 'Администрирование',
       :icon => 'users',
       :children => [
@@ -44,14 +38,11 @@ module SideBarHelper
       :icon => 'database',
       :children => children} if @current_role_user.present?
     result << {
-      :name => 'Заголовок ссылок',
+      :name => 'Поиск',
       :icon => 'search-plus',
       :children => [
-      {:name => 'Ссылка ребёнок',
-       :controller => :welcome, :action => :index,
-       :icon => 'binoculars'},
-      {:name => 'Ссылка ребёнок',
-       :controller => :welcome, :action => :index,
+      {:name => 'Поиск туров',
+       :controller => :tours, :action => :search,
        :icon => 'search',
        :class => 'long'}
     ]} if @current_role_user.present?
