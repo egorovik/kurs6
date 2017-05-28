@@ -274,3 +274,29 @@ $percents: (90 85 80 75 70 65 60 55 50 40 30 20 10 5)
 .step
   position: relative
   left: 20px
+  
+@media screen and (max-width: 1130px)
+  .table
+    border: 0
+  .table thead
+    display: none
+  .table tr
+    margin-bottom: 10px
+    display: block
+    border-bottom: 2px solid #ddd
+  .table td
+    display: block
+    text-align: right
+    font-size: 13px
+    border-bottom: 1px dotted #ccc
+    
+    img
+      display: none
+
+  .table td:last-child 
+    border-bottom: 0
+  .table td:before
+    content: attr(data-label)
+    float: left
+    text-transform: uppercase
+    font-weight: bold

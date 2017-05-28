@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  skip_before_action :check_app_auth, only: [:new, :create, :activate]
   skip_before_filter :require_login, :only => [:new, :create, :activate]
 
   # GET /users

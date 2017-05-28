@@ -26,10 +26,14 @@
   %tbody
     - @excursions.each do |excursion|
       %tr
-        %td.center= excursion.name
-        %td.center= excursion.price
-        %td.center= excursion.city.name
-        %td.center= excursion.descr
+        %td.center{data: {label: Excursion.human_attribute_name(:name)}}
+          = excursion.name
+        %td.center{data: {label: Excursion.human_attribute_name(:price)}}
+          = excursion.price
+        %td.center{data: {label: Excursion.human_attribute_name(:city)}}
+          = excursion.city.name
+        %td.center{data: {label: Excursion.human_attribute_name(:descr)}}
+          = excursion.descr
         %td.right
           = link_to excursion, class: 'btn btn-warning' do
             = fa_icon :eye

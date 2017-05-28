@@ -26,11 +26,16 @@
   %tbody
     - @tours.each do |tour|
       %tr
-        %td.center= lnil(tour.start_date)
-        %td.center= tour.days_in_tour
-        %td.center= tour.route.name
-        %td.center= tour.add_price + tour.route.base_price
-        %td.center= tour.add_descr
+        %td.center{data: {label: Tour.human_attribute_name(:start_date)}}
+          = lnil(tour.start_date)
+        %td.center{data: {label: Tour.human_attribute_name(:days_in_tour)}}
+          = tour.days_in_tour
+        %td.center{data: {label: Tour.human_attribute_name(:route)}}
+          = tour.route.name
+        %td.center{data: {label: "Общая цена"}}
+          = tour.add_price + tour.route.base_price
+        %td.center{data: {label: Tour.human_attribute_name(:add_descr)}}
+          = tour.add_descr
         %td.right
           = link_to tour, class: 'btn btn-warning' do
             = fa_icon :eye

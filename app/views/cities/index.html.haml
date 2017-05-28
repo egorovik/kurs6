@@ -17,7 +17,8 @@
     %tbody
       - @cities.each do |city|
         %tr
-          %td.center= city.name
+          %td.center{data: {label: City.human_attribute_name(:name)}}
+            = city.name
           %td.right
             = link_to edit_city_path(city), class: 'btn btn-info' do
               = fa_icon :edit

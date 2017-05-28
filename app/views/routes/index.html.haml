@@ -20,10 +20,14 @@
     %tbody
       - @routes.each do |route|
         %tr
-          %td.center= route.name
-          %td.center= route.base_price
-          %td.center= route.city.name
-          %td.center= route.descr
+          %td.center{data: {label: Route.human_attribute_name(:name)}}
+            = route.name
+          %td.center{data: {label: Route.human_attribute_name(:base_price)}}
+            = route.base_price
+          %td.center{data: {label: Route.human_attribute_name(:city)}}
+            = route.city.name
+          %td.center{data: {label: Route.human_attribute_name(:descr)}}
+            = route.descr
           %td.right
             = link_to edit_route_path(route), class: 'btn btn-info' do
               = fa_icon :edit
