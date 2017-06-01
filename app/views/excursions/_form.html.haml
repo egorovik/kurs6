@@ -10,18 +10,18 @@
     .col-md-6
       .form-group
         = f.label :price
-        = f.number_field :price, class: 'form-control'
+        = f.text_field :price, class: 'form-control'
         = f.error_messages_for(:price)
   .panel.panel-wave
     .panel-heading
       Город
     .panel-body
-      .row
-        .col-md-6
-          .form-group
-            = f.label City.human_attribute_name(:name)
-            = f.select(:city_id, City.all.map{|x| [x.name, x.id]}, {}, class: 'form-control')
-            = f.error_messages_for(:city_id)
+      = f.collection_select :city_id, City.all, :id, :name, {include_blank: true}, {id: 'city_select'}
+      = f.error_messages_for(:city_id)
+      = f.fields_for :city, f.object.city || f.object.build_city do |fr|
+        %fieldset#city-fieldset{"data-content" => "#{render "city_fields", fr: fr}"}
+          %div#city-fields
+            Выбран существующий город
   .row
     .col-md-6
       .form-group

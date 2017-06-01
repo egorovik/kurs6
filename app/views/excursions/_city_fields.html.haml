@@ -1,0 +1,6 @@
+.row
+  .col-md-6
+    .form-group
+      = fr.label City.human_attribute_name(:name)
+      = fr.text_field :name, class: 'form-control'
+      = fr.error_messages_for(:name)

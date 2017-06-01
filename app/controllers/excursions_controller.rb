@@ -25,9 +25,19 @@ class ExcursionsController < ApplicationController
   # POST /excursions.json
   def create
     @excursion = Excursion.new(excursion_params)
+    
+    flag = true
+    if !(params["excursion"]["city_id"].empty?)
+      @excursion.city_id = params["excursion"]["city_id"].to_i
+    else
+      city = City.new
+      city.name = params["excursion"]["city"]["name"]
+      flag = false if !(city.save)
+      @excursion.city = city
+    end
 
     respond_to do |format|
-      if @excursion.save
+      if flag and @excursion.save
         format.html { redirect_to @excursion, notice: 'Excursion was successfully created.' }
         format.json { render :show, status: :created, location: @excursion }
       else
@@ -69,6 +79,7 @@ class ExcursionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def excursion_params
-      params.require(:excursion).permit(:name, :price, :city_id, :descr)
+      params.require(:excursion).permit(:name, :price, :descr, :city_id,
+        cities_attributes: [:id, :name])
     end
 end

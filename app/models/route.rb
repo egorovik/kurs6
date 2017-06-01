@@ -4,7 +4,7 @@ class Route < ActiveRecord::Base
   accepts_nested_attributes_for :city
   
   validates :name, presence: true, uniqueness: true
-  validates :base_price, presence: true, numericality: {greater_than_or_equal_to: 0}
+  validates :base_price, presence: true, numericality: {greater_than_or_equal_to: 1}
   validates :city, presence: true
   validates :descr, presence: true
 end

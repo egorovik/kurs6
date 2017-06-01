@@ -30,13 +30,33 @@ class ToursController < ApplicationController
   # POST /tours.json
   def create
     @tour = Tour.new(tour_params)
-    city1 = City.where(name: @tour.route.city.name)
-    if (city1.count) != 0
-      @tour.route.city = city1.first
+#    raise "#{params}"
+    
+    flag = true
+    flag1 = true
+    if !(params["tour"]["route_id"].empty?)
+      @tour.route_id = params["tour"]["route_id"].to_i
+    else
+      route = Route.new
+      route.name = params["tour"]["route_attributes"]["name"]
+      route.base_price = params["tour"]["route_attributes"]["base_price"].to_i
+      route.descr = params["tour"]["route_attributes"]["descr"]
+      
+      if !(params["tour"]["route_attributes"]["city_id"].empty?)
+        route.city_id = params["tour"]["route_id"].to_i
+      else
+        city = City.new
+        city.name = params["tour"]["route_attributes"]["city_attributes"]["name"]
+        flag1 = false if !(city.save)
+        route.city = city
+      end
+      
+      flag = false if !(route.save)
+      @tour.route = route
     end
 
     respond_to do |format|
-      if @tour.save
+      if flag1 and flag and @tour.save
         format.html { redirect_to @tour, notice: 'Тур успешно создан.' }
         format.json { render :show, status: :created, location: @tour }
       else
@@ -79,7 +99,7 @@ class ToursController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tour_params
       params.require(:tour).permit(:start_date, :days_in_tour, :route_id, :add_price, :add_descr,
-      route_attributes: [:id, :name, :base_price, :descr,
+      route_attributes: [:id, :name, :base_price, :descr, :city_id,
       city_attributes: [:name]])
     end
 end

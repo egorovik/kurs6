@@ -1,0 +1,6 @@
+.row
+  .col-md-6
+    .form-group
+      = crf.label City.human_attribute_name(:name)
+      = crf.text_field :name, class: 'form-control'
+      = crf.error_messages_for(:name)

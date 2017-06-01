@@ -1,0 +1,28 @@
+.row
+  .col-md-6
+    .form-group
+      = rf.label Route.human_attribute_name(:name)
+      = rf.text_field :name, class: 'form-control'
+      = rf.error_messages_for(:name)
+.row
+  .col-md-6
+    .form-group
+      = rf.label Route.human_attribute_name(:base_price)
+      = rf.number_field :base_price, class: 'form-control'
+      = rf.error_messages_for(:base_price)
+.panel.panel-wave
+  .panel-heading
+    = rf.label "Город"
+  .panel-body
+    = rf.collection_select :city_id, City.all, :id, :name, {include_blank: true}, {id: 'city_select'}
+    = rf.error_messages_for(:city_id)
+    = rf.fields_for :city, rf.object.city || rf.object.build_city do |crf|
+      %fieldset#city-fieldset{"data-content" => "#{render "city_fields", crf: crf}"}
+        %div#city-fields
+          Выбран существующий город
+.row
+  .col-md-6
+    .form-group
+      = rf.label Route.human_attribute_name(:descr)
+      = rf.text_area :descr, class: 'form-control'
+      = rf.error_messages_for(:descr)

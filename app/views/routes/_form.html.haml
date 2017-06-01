@@ -10,7 +10,7 @@
     .col-md-6
       .form-group
         = f.label Route.human_attribute_name(:base_price)
-        = f.number_field :base_price, class: 'form-control'
+        = f.text_field :base_price, class: 'form-control'
         = f.error_messages_for(:base_price)
   .panel.panel-wave
     .panel-heading

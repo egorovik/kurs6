@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170501085108) do
 
   create_table "excursions", force: :cascade do |t|
     t.string   "name",       null: false
-    t.integer  "price",      null: false
+    t.float    "price",      null: false
     t.integer  "city_id",    null: false
     t.text     "descr",      null: false
     t.datetime "created_at", null: false
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170501085108) do
 
   create_table "routes", force: :cascade do |t|
     t.string   "name",       null: false
-    t.integer  "base_price", null: false
+    t.float    "base_price", null: false
     t.integer  "city_id",    null: false
     t.text     "descr",      null: false
     t.datetime "created_at", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 20170501085108) do
     t.date     "start_date",   null: false
     t.integer  "days_in_tour", null: false
     t.integer  "route_id",     null: false
-    t.integer  "add_price",    null: false
+    t.float    "add_price",    null: false
     t.text     "add_descr",    null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
