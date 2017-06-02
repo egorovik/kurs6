@@ -58,15 +58,15 @@ class Tour < ActiveRecord::Base
       end
     
       if !(params['search']['tour.add_descr'].nil?) and !(params['search']['tour.add_descr'].empty?)
-        result[1] = result[1].where("add_descr ilike '%?%'", params['search']['tour.add_descr'])
+        result[1] = result[1].where("add_descr ilike ?", "%#{params['search']['tour.add_descr']}%")
       end
     
       if !(params['search']['route.name'].nil?) and !(params['search']['route.name'].empty?)
-        result[1] = result[1].where("routes.name = '?'", params['search']['route.name'])
+        result[1] = result[1].where("routes.name ilike ?", "%#{params['search']['route.name']}%")
       end
     
       if !(params['search']['route.descr'].nil?) and !(params['search']['route.descr'].empty?)
-        result[1] = result[1].where("routes.descr ilike '%?%'", params['search']['route.descr'])
+        result[1] = result[1].where("routes.descr ilike ?", "%#{params['search']['route.descr']}%")
       end
     
       if !(params['search']['route.base_price0'].nil?) and !(params['search']['route.base_price0'].empty?)
