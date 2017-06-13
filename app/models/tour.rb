@@ -42,19 +42,19 @@ class Tour < ActiveRecord::Base
       end
     
       if !(params['search']['tour.days_in_tour0'].nil?) and !(params['search']['tour.days_in_tour0'].empty?)
-        result[1] = result[1].where("days_in_tour >= ?", params['search']['tour.days_in_tour0'])
+        result[1] = result[1].where("days_in_tour >= ?", params['search']['tour.days_in_tour0'].to_i)
       end
     
       if !(params['search']['tour.days_in_tour1'].nil?) and !(params['search']['tour.days_in_tour1'].empty?)
-        result[1] = result[1].where("days_in_tour <= ?", params['search']['tour.days_in_tour0'])
+        result[1] = result[1].where("days_in_tour <= ?", params['search']['tour.days_in_tour0'].to_i)
       end
     
       if !(params['search']['tour.add_price0'].nil?) and !(params['search']['tour.add_price0'].empty?)
-        result[1] = result[1].where("add_price >= ?", params['search']['tour.add_price0'])
+        result[1] = result[1].where("add_price >= ?", params['search']['tour.add_price0'].to_i)
       end
     
       if !(params['search']['tour.add_price1'].nil?) and !(params['search']['tour.add_price1'].empty?)
-        result[1] = result[1].where("add_price <= ?", params['search']['tour.add_price1'])
+        result[1] = result[1].where("add_price <= ?", params['search']['tour.add_price1'].to_i)
       end
     
       if !(params['search']['tour.add_descr'].nil?) and !(params['search']['tour.add_descr'].empty?)
@@ -70,11 +70,11 @@ class Tour < ActiveRecord::Base
       end
     
       if !(params['search']['route.base_price0'].nil?) and !(params['search']['route.base_price0'].empty?)
-        result[1] = result[1].where("routes.base_price >= ?", params['search']['route.base_price0'])
+        result[1] = result[1].where("routes.base_price >= ?", params['search']['route.base_price0'].to_i)
       end
     
       if !(params['search']['route.base_price1'].nil?) and !(params['search']['route.base_price1'].empty?)
-        result[1] = result[1].where("routes.base_price <= ?", params['search']['route.base_price1'])
+        result[1] = result[1].where("routes.base_price <= ?", params['search']['route.base_price1'].to_i)
       end
     
       if !(params['search']['city.name'].nil?) and !(params['search']['city.name'].empty?)
